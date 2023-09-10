@@ -5,12 +5,12 @@
 ////  Created by Abdullah Omar on 03/09/2023.
 ////
 //
-//import Foundation
-//import UIKit
-//
-class BaseTableViewModel<T> {
+import Foundation
+import UIKit
+
+ open class BaseTableViewModel<T> {
     // Data source for the table view
-    var items: [T] = [] {
+     public var items: [T] = [] {
         didSet {
             // Notify observers that the data has changed
             dataUpdated?()
@@ -18,18 +18,18 @@ class BaseTableViewModel<T> {
     }
     
     // callback for interfaces
-    var showAlertClouser:(()->())?
-    var updateLoadingStatus : (()->())?
+     public  var showAlertClouser:(()->())?
+     public  var updateLoadingStatus : (()->())?
  
     // MARK: - State Handling
 
-    var state: State = .empty {
+     public  var state: State = .empty {
         didSet {
             self.updateLoadingStatus?()
         }
     }
 
-    var alertMessage: String? {
+     public  var alertMessage: String? {
         didSet{
             self.showAlertClouser?()
         }
@@ -37,30 +37,30 @@ class BaseTableViewModel<T> {
     
     
     // Closure to notify observers when data changes
-    var dataUpdated: (() -> Void)?
+     public   var dataUpdated: (() -> Void)?
     
     // Number of sections in the table view
-    var numberOfSections: Int {
+    public   var numberOfSections: Int {
         return 1
     }
     
     // Number of rows in the table view
-    var numberOfRows: Int {
+     public var numberOfRows: Int {
         return items.count
     }
     
     // Initialize the view model with data
-    init(items: [T]) {
+     public init(items: [T]) {
         self.items = items
     }
     
     // Get the item at a specific index path
-    func getItem(at indexPath: IndexPath) -> T {
+     public   func getItem(at indexPath: IndexPath) -> T {
         return items[indexPath.row]
     }
     
     // Reload data in the table view
-    func reloadData() {
+     public  func reloadData() {
         dataUpdated?()
     }
     

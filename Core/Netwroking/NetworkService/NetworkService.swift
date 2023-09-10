@@ -9,13 +9,20 @@
 
 import Foundation
 
-protocol NetworkServiceProtocol {
+
+import Foundation
+
+public protocol NetworkServiceProtocol {
     func performGETRequest<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void)
-     func performPOSTRequest<T: Decodable>(url: URL, body: Data, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void)
+    func performPOSTRequest<T: Decodable>(url: URL, body: Data, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void)
 }
 
 public class NetworkService: NetworkServiceProtocol {
-      func performGETRequest<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    
+    public init() {}
+    public func performGETRequest<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
+          
+
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let _ = error {
                 completion(.failure(.requestFailed))
@@ -37,7 +44,7 @@ public class NetworkService: NetworkServiceProtocol {
         }.resume()
     }
     
-      func performPOSTRequest<T: Decodable>(url: URL, body: Data, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    public func performPOSTRequest<T: Decodable>(url: URL, body: Data, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = body

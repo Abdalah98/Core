@@ -4,14 +4,18 @@
 ////
 ////  Created by Abdullah Omar on 29/08/2023.
 ////
-//
+
+import Foundation
+
 import UIKit
-//
-class CustomActivityIndicator: UIView {
+
+import UIKit
+
+public class CustomActivityIndicator: UIView {
     private let activityView = UIView()
     private let animationDuration: TimeInterval = 0.8
 
-    override init(frame: CGRect) {
+  public override init(frame: CGRect) {
         super.init(frame: frame)
         setupActivityIndicator()
     }
@@ -37,7 +41,7 @@ class CustomActivityIndicator: UIView {
         activityView.addSubview(activityIndicator)
     }
 
-    func startAnimating() {
+   public func startAnimating() {
         isHidden = false
         alpha = 1
         activityView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -47,7 +51,7 @@ class CustomActivityIndicator: UIView {
         }, completion: nil)
     }
 
-    func stopAnimating() {
+  public  func stopAnimating() {
         UIView.animate(withDuration: animationDuration, animations: {
             self.alpha = 0
         }) { _ in
